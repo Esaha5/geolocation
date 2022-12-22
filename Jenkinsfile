@@ -1,13 +1,13 @@
 pipeline {
 
+    triggers {
+  pollSCM '* * * * *'
+    }
     agent any
     tools {
   maven 'M2_HOME'
-}
-    triggers {
-  pollSCM '* * * * *'
-}
-
+    }
+  
     stages {
         stage('maven package') {
             steps {
@@ -19,11 +19,6 @@ pipeline {
         stage('test') {
             steps {
                 sh'mvn test'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'test'
             }
         }
         stage('Deploy') {
