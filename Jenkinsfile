@@ -13,7 +13,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('SonarServer') {
-                  sh 'org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar'
+                  sh 'mvn sonar:sonar'
               }
             }
           }
