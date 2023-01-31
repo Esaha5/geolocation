@@ -10,7 +10,9 @@ pipeline {
   
     stages {
         stage("build & SonarQube analysis") {
-            agent any
+              agent {
+        docker { image 'maven:3.8.6-openjdk-11-slim' }
+   }
             steps {
               withSonarQubeEnv('SonarServer') {
                   sh 'mvn sonar:sonar -Dsonar.projectKey=Esaha4_geolocation -Dsonar.java.binaries=.'
