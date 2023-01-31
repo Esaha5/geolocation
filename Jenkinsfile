@@ -3,9 +3,7 @@ pipeline {
     triggers {
         pollSCM '* * * * *'
     }
-    agent {
-        docker {image 'maven:3.8.7-openjdk-18'}
-    }
+    agent any
     tools {
         maven 'M2_HOME'
     }
@@ -15,7 +13,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('SonarServer') {
-                  sh 'mvn sonar:sonar'
+                  sh 'mvn sonar:sonar -Dsonar.projectKey=kserge2001_geolocation -Dsonar.java.binaries=.'
               }
             }
           }
