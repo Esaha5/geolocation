@@ -9,6 +9,14 @@ pipeline {
     }
   
     stages {
+        stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('sonar') {
+                  sh 'mvn sonar:sonar'
+              }
+            }
+          }
         stage('maven package') {
             steps {
                 sh'mvn clean'
@@ -21,15 +29,11 @@ pipeline {
                 sh'mvn test'
             }
         }
-        stage('Hello') {
+        stage('deploy') {
             steps {
-                echo 'Hello Michael!!!'
+                echo 'deployement'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'deploy'
-            }
         }
     }
 }
