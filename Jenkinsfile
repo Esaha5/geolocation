@@ -4,6 +4,11 @@ pipeline {
     tools {
         maven 'M2_HOME'
     }
+    environment {
+    registry = '499818666258.dkr.ecr.us-east-1.amazonaws.com/jenkins'
+    registryCredential = 'aws_ecr_id'
+    dockerimage = ''
+}
   
     stages {
         stage("build & SonarQube analysis") {     
@@ -33,16 +38,26 @@ pipeline {
                 sh'mvn package'
             }
         }
-        stage('test') {
+        stage('Build Image') {
+            
             steps {
-                sh'mvn test'
+                script{
+                  def mavenPom = readMavenPom file: 'pom.xml'
+                    dockerImage = docker.build registry + ":${mavenPom.version}"
+                } 
             }
         }
-        stage('deploy') {
-            steps {
-                echo 'deployement'
+        stage('Deploy image') {
+           
+            
+            steps{
+                script{ 
+                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
+                        dockerImage.push()
+                    }
+                }
             }
-        }
-        }
+        } 
+     }
    
 }
