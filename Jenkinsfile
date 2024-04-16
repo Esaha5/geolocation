@@ -4,15 +4,22 @@ pipeline {
     tools {
         maven 'M2_HOME'
     }
-    stages {
-        stage('maven build') {
+    stages{
+        stage('maven build'){
             steps{
                 sh 'mvn clean install package'
             }
-
+        }
+        stage('check pwd'){
+            steps{
+                sh 'pwd'
+            }
+        }
+        stage('List the contain'){
+            steps{
+                sh 'ls'
+            }
         }
     }
-
-
 
 }
