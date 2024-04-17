@@ -18,7 +18,7 @@ pipeline {
                  classifier: '', 
                   file: "target/${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}", 
                    type: "${POM_PACKAGING}"]], 
-                    credentialsId: 'NexusID"' 
+                    credentialsId: 'NexusID', 
                      groupId: '${POM_GROUPID}', 
                       nexusUrl: '192.168.56.20:8081', 
                        nexusVersion: 'nexus3', 
