@@ -16,7 +16,7 @@ pipeline {
                 nexusArtifactUploader artifacts: 
                 [[artifactId: '${POM_ARTIFACTID}', 
                  classifier: '', 
-                  file: 'target/${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}', 
+                  file: 'target/${ARTIFACTID}-${VERSION}.${PACKAGING}', 
                    type: '${POM_PACKAGING}']], 
                     credentialsId: 'NexusID', 
                      groupId: '${POM_GROUPID}', 
