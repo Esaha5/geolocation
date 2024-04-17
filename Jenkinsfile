@@ -15,17 +15,17 @@ pipeline {
                 script{
                 def POM = readMavenPom file: 'pom.xml'
                 nexusArtifactUploader artifacts: 
-                [[artifactId: "${POM.ARTIFACTID}", 
+                [[artifactId: "${POM.artifactId}", 
                  classifier: '', 
-                  file: "target/${POM.ARTIFACTID}-${POM.VERSION}.${POM.PACKAGING}", 
-                   type: "${POM.PACKAGING}"]], 
+                  file: "target/${POM.artifactId}-${POM.version}.${POM.packaging}", 
+                   type: "${POM.packaging}"]], 
                     credentialsId: 'NexusID', 
-                     groupId: '${POM_GROUPID}', 
+                     groupId: "${POM.groupId}", 
                       nexusUrl: '192.168.56.20:8081', 
                        nexusVersion: 'nexus3', 
                         protocol: 'http', 
                          repository: 'biom', 
-                          version: '${POM.VERSION}'
+                          version: "${POM.version}"
                 }
             }
         }
