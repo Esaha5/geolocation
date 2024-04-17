@@ -14,17 +14,17 @@ pipeline {
             steps{
                 script{
                 nexusArtifactUploader artifacts: 
-                [[artifactId: '${POM_ARTIFACTID}', 
+                [[artifactId: "${POM_ARTIFACTID}", 
                  classifier: '', 
-                  file: 'target/${ARTIFACTID}-${VERSION}.${PACKAGING}', 
-                   type: '${POM_PACKAGING}']], 
-                    credentialsId: 'NexusID', 
-                     groupId: '${POM_GROUPID}', 
+                  file: "target/${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}", 
+                   type: "${POM_PACKAGING}"]], 
+                    credentialsId: 'NexusID"' 
+                     groupId: "${POM_GROUPID}", 
                       nexusUrl: '192.168.56.20:8081', 
                        nexusVersion: 'nexus3', 
                         protocol: 'http', 
                          repository: 'biom', 
-                          version: '${POM_VERSION}'
+                          version: "${POM_VERSION}"
                 }
             }
         }
